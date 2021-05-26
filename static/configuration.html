@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <link href="css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <fieldset>
+            <div class="config flex-column">
+                <label class="label" for="subscription-dropdown">Azure Subscription</label>
+                <div class="textfield">
+                    <select id="subscription-dropdown" class="textfield-input">
+                        <option value="" selected disabled hidden>Select Azure Subscription</option>
+                    </select>
+                </div>
+                <div class="inline-configuration-error empty"></div>
+            </div>
+            <div class="config flex-column">
+                <label class="label" for="rg-dropdown">Resource Group Name</label>
+                <div class="textfield">
+                    <select id="rg-dropdown" class="textfield-input">
+                        <option value="" selected disabled hidden>Select Resource Group</option>
+                    </select>
+                </div>
+                <div class="inline-configuration-error empty"></div>
+            </div>
+            <div class="config flex-column">
+                <label class="label" for="migrate-project-dropdown">Azure Migrate Project</label>
+                <div class="textfield">
+                    <select id="migrate-project-dropdown" class="textfield-input">
+                        <option value="" selected disabled hidden>Select Project</option>
+                    </select>
+                </div>
+                <div class="inline-configuration-error empty"></div>
+            </div>
+        </fieldset>
+    </div>
+
+    <script src="lib/VSS.SDK.min.js"></script>
+    <script type="text/javascript">
+        VSS.init(
+            {
+                explicitNotifyLoaded: true,
+                setupModuleLoader: true,
+                usePlatformScripts: true,
+                usePlatformStyles: true
+            });
+        VSS.ready(function () {
+            require(["dist/configuration"], function (main) { });
+        });
+    </script>
+</body>
+
+</html>

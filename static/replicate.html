@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link href="css/main.css" rel="stylesheet" />
+</head>
+
+<body>
+	<div class="widget">
+		<div class="title">
+			<h2 class="widget-title"></h2>
+			<h4 class="subtitle no-margin"></h4>
+		</div>
+		<div id="Chart-Container"></div>
+	</div>
+
+	<script src="lib/VSS.SDK.min.js"></script>
+	<script type="text/javascript">
+		VSS.init(
+        {
+            explicitNotifyLoaded: true,
+            setupModuleLoader: true,
+            usePlatformScripts: true,
+            usePlatformStyles: true
+        });
+        VSS.ready(function () {
+            require(["dist/replicate"], function (main) { });
+        });
+	</script>
+</body>
+
+</html>

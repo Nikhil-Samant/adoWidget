@@ -1,0 +1,107 @@
+{
+    "manifestVersion": 1,
+    "id": "azure-migrate-status",
+    "publisher": "Nikhil-Samant",
+    "version": "1.0.17",
+    "name": "Azure Migrate Status",
+    "baseUri": "https://localhost:44300",
+    "description": "Tracks the Azure Migrate status in Azure and display the reports on dashboard.",
+    "public": false,
+    "categories": ["Azure Boards"],
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
+    },
+    "icons": {
+        "default": "dist/img/logo.png"
+    },
+    "demands": ["contribution/ms.vss-dashboards-web.widget-sdk-version-2", "contribution/ms.vss-web.charts-service"],
+    "contributions": [
+        {
+            "id": "AzureMigrateReplicationReport",
+            "type": "ms.vss-dashboards-web.widget",
+            "targets": [
+                "ms.vss-dashboards-web.widget-catalog",
+                "Nikhil-Samant.azure-migrate-status.AzureMigrateWidget.Configuration"
+            ],
+            "properties": {
+                "name": "Azure Migrate Replication Status",
+                "description": "Gets the Azure Migrate replication status",
+                "catalogIconUrl": "dist/img/CatalogIcon.png",
+                "uri": "dist/replicate.html",
+                "isNameConfigurable": true,
+                "supportedSizes": [
+                    {
+                        "rowSpan": 2,
+                        "columnSpan": 2
+                    },
+                    {
+                        "rowSpan": 3,
+                        "columnSpan": 3
+                    },
+                    {
+                        "rowSpan": 4,
+                        "columnSpan": 4
+                    }
+                ],
+                "supportedScopes": [
+                    "project_team"
+                ]
+            }
+        },
+        {
+            "id": "AzureMigrateWidget.Configuration",
+            "type": "ms.vss-dashboards-web.widget-configuration",
+            "targets": [ "ms.vss-dashboards-web.widget-configuration" ],
+            "properties": {
+                "name": "Azure Migrate Widget Configuration",
+                "description": "Configures Azure Migrate Widget",
+                "uri": "dist/configuration.html"
+            }
+        }
+    ],
+    "files": [
+        {
+            "path": "dist/replicate.html",
+            "addressable": true
+        },
+        {
+            "path": "dist/replicate.js",
+            "addressable": true
+        },
+        {
+            "path": "dist/configuration.html",
+            "addressable": true
+        },
+        {
+            "path": "dist/configuration.js",
+            "addressable": true
+        },
+        {
+            "path": "dist/lib",
+            "addressable": true
+        },
+        {
+            "path": "dist/img",
+            "addressable": true
+        },
+        {
+            "path": "dist/css",
+            "addressable": true
+        }
+    ],
+    "screenshots": [
+        {
+            "path": "dist/img/screenshot1.png"
+        }
+    ],
+    "scopes":[
+        "vso.serviceendpoint_query"
+    ]
+}
