@@ -11,3 +11,5 @@ coverage
 *.lcov
 
 **/.DS_Store
+
+out/

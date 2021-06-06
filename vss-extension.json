@@ -1,11 +1,11 @@
 {
     "manifestVersion": 1,
-    "id": "azure-migrate-status",
+    "id": "azure-migrate-widgets",
     "publisher": "Nikhil-Samant",
-    "version": "1.0.17",
-    "name": "Azure Migrate Status",
-    "baseUri": "https://localhost:44300",
-    "description": "Tracks the Azure Migrate status in Azure and display the reports on dashboard.",
+    "version": "1.0.1",
+    "name": "Azure Migrate",
+    "baseUri": "",
+    "description": "Enable users to visualise the overall status of Azure Migrate, delivering a visual indications on the dashboard",
     "public": false,
     "categories": ["Azure Boards"],
     "targets": [
@@ -15,7 +15,7 @@
     ],
     "content": {
         "details": {
-            "path": "overview.md"
+            "path": "README.md"
         }
     },
     "icons": {
@@ -24,26 +24,30 @@
     "demands": ["contribution/ms.vss-dashboards-web.widget-sdk-version-2", "contribution/ms.vss-web.charts-service"],
     "contributions": [
         {
-            "id": "AzureMigrateReplicationReport",
+            "id": "AzureMigrateSummaryWidget",
             "type": "ms.vss-dashboards-web.widget",
             "targets": [
                 "ms.vss-dashboards-web.widget-catalog",
-                "Nikhil-Samant.azure-migrate-status.AzureMigrateWidget.Configuration"
+                "Nikhil-Samant.azure-migrate-widgets.AzureMigrateWidget.Configuration"
             ],
             "properties": {
-                "name": "Azure Migrate Replication Status",
-                "description": "Gets the Azure Migrate replication status",
+                "name": "Azure Migrate Summary",
+                "description": "Gets the Azure Migrate summary",
                 "catalogIconUrl": "dist/img/CatalogIcon.png",
-                "uri": "dist/replicate.html",
+                "uri": "dist/summary.html",
                 "isNameConfigurable": true,
                 "supportedSizes": [
                     {
                         "rowSpan": 2,
-                        "columnSpan": 2
+                        "columnSpan": 3
                     },
                     {
                         "rowSpan": 3,
                         "columnSpan": 3
+                    },
+                    {
+                        "rowSpan": 3,
+                        "columnSpan": 4
                     },
                     {
                         "rowSpan": 4,
@@ -68,11 +72,11 @@
     ],
     "files": [
         {
-            "path": "dist/replicate.html",
+            "path": "dist/summary.html",
             "addressable": true
         },
         {
-            "path": "dist/replicate.js",
+            "path": "dist/summaryWidget.js",
             "addressable": true
         },
         {

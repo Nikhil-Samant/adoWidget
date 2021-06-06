@@ -5,11 +5,23 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "type": "pwa-chrome",
+            "name": "Launch Chrome against localhost, with sourcemaps",
+            "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
             "url": "https://localhost:44300",
-            "webRoot": "${workspaceFolder}"
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}",
+            "trace": true,
+            "smartStep": true,
+            "userDataDir": "${workspaceRoot}/out/chrome"
+        },
+        {
+            "name": "Attach to Chrome, with sourcemaps",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}"
         }
     ]
 }

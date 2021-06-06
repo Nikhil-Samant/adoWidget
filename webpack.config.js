@@ -3,8 +3,9 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 // Webpack entry points. Mapping from resulting bundle name to the source file entry.
 const entries = {
-  replicate: "./src/replicate.ts",
+  summaryWidget: "./src/summaryWidget.ts",
   configuration: "./src/configuration.ts",
+  adoService: "./src/adoService.ts",
 };
 
 module.exports = {
