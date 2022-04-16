@@ -50,3 +50,40 @@
 .no-margin {
     margin-top: auto;
 }
+
+.unconfigured-message-body {
+    flex: 2 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding-top: 12%;
+}
+
+.unconfigured-message-body .unconfigured-message-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    color: rgba(0,0,0,.55);
+    color: var(--text-secondary-color,rgba(0, 0, 0, .55));
+    font-size: 1rem;
+    text-align: center;
+}
+
+.unconfigured-message-body .unconfigured-message-icon {
+    color: rgba(102,102,102,1);
+    color: rgba(var(--palette-neutral-60,102, 102, 102),1);
+    text-align: center;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+    padding-top: 6px;
+}
+
+.unconfigured-image.contain {
+    align-self: center;
+    justify-self: center;
+    display: block;
+    width: 100%;
+    height: auto;
+}

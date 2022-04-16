@@ -5,4 +5,5 @@ interface ISettings {
 	migrateProjectName: string;
 	rowSpan: number;
 	colSpan: number;
+	chartType: string;
 }

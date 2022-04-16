@@ -27,6 +27,9 @@ export class SummaryWiget {
         this.currentSettings.resourceGroupName &&
         this.currentSettings.migrateProjectName
       ) {
+        // Remove the unconfigured message
+        $("#unconfigured").remove();
+
         this.adoService
           .GetAzureSubscriptions(this.webContext.project.name)
           .then((subscriptions) => {
@@ -45,14 +48,16 @@ export class SummaryWiget {
               .then((result) => {
                 const data = JSON.parse(result);
                 if (data) {
-                  this.renderWidget(data);
+                  this.renderWidget(data, this.currentSettings.chartType);
                 } else {
                   this.widgetHelpers.WidgetStatusHelper.Unconfigured();
                 }
               });
           });
+        return this.widgetHelpers.WidgetStatusHelper.Success();
+      } else {
+        return this.widgetHelpers.WidgetStatusHelper.Unconfigured();
       }
-      return this.widgetHelpers.WidgetStatusHelper.Success();
     } catch (e) {
       // Satisfy the linter
     }
@@ -71,6 +76,7 @@ export class SummaryWiget {
         migrateProjectName: "",
         colSpan: 3,
         rowSpan: 2,
+        chartType: "bar",
       };
     }
 
@@ -79,7 +85,7 @@ export class SummaryWiget {
     this.currentSettings.colSpan = widgetSettings.size.columnSpan;
   }
 
-  private renderWidget(data) {
+  private renderWidget(data, chartType: string) {
     const $title = $("h2.widget-title");
     const $subtitle = $("h4.subtitle");
     const $container = $("#Chart-Container");
@@ -105,16 +111,17 @@ export class SummaryWiget {
     const widgetWidth = Math.round(
       this.widgetHelpers.WidgetSizeConverter.ColumnsToPixelWidth(
         this.currentSettings.colSpan
-      ) * 0.90
+      ) * 0.9
     );
     const chartOptions: Contracts.CommonChartOptions = {
       hostOptions: {
         height: widgetHeight,
         width: widgetWidth,
       },
-      chartType: Contracts.ChartTypesConstants.Bar,
+      chartType: this.GetChartType(chartType),
       series: [
         {
+          name: "Servers",
           data: overallStatus,
         },
       ],
@@ -127,7 +134,9 @@ export class SummaryWiget {
           "Migrated",
         ],
       },
-      title: "Servers"
+      yAxis: {
+        title: "Machines",
+      },
     };
 
     chartService.then((service) => {
@@ -135,6 +144,22 @@ export class SummaryWiget {
     });
   }
 
+  private GetChartType(chartType: string): string {
+    switch (chartType) {
+      case "bar":
+        return Contracts.ChartTypesConstants.Bar;
+      case "stackedbar":
+        return Contracts.ChartTypesConstants.StackedBar;
+      case "column":
+        return Contracts.ChartTypesConstants.Column;
+      case "stackedcolumn":
+        return Contracts.ChartTypesConstants.StackedColumn;
+      case "pie":
+        return Contracts.ChartTypesConstants.Pie;
+      default:
+        return Contracts.ChartTypesConstants.Bar;
+    }
+  }
   private buildChartService(): IPromise<Service.IChartsService> {
     const chartService = Service.ChartsService.getService();
     return chartService;

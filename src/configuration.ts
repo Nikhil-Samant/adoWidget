@@ -9,6 +9,8 @@ export class Configuration {
   private $subscriptionSelect = $("#subscription-dropdown");
   private $migrationProjectSelect = $("#migrate-project-dropdown");
   private $resourceGroupSelect = $("#rg-dropdown");
+  private $chartTypeSelect = $("#chart-type-dropdown");
+
   private adoService: AdoService;
   private webContext: WebContext;
 
@@ -21,7 +23,8 @@ export class Configuration {
     this.widgetConfigurationContext = widgetConfigurationContext;
     let settings: ISettings;
     settings = JSON.parse(widgetSettings.customSettings.data);
-
+    // Show Chart options
+    this.showChartType(settings);
     // First get the Azure Subscriptions using the Azure DevOps REST API
     this.adoService
       .GetAzureSubscriptions(this.webContext.project.name)
@@ -100,8 +103,8 @@ export class Configuration {
 
         VSS.resize();
 
-        // Only when Migrate project is changed refresh the widget
-        this.$migrationProjectSelect.on("change", () => {
+        // Only when Migrate project or chart type is changed refresh the widget
+        this.$migrationProjectSelect.add(this.$chartTypeSelect).on("change", () => {
           this.widgetConfigurationContext.notify(
             this.widgetHelpers.WidgetEvent.ConfigurationChange,
             this.widgetHelpers.WidgetEvent.Args(this.getCustomSettings())
@@ -172,12 +175,21 @@ export class Configuration {
     }
   }
 
+  private showChartType(settings: ISettings){
+    if (settings && settings.chartType) {
+      this.$chartTypeSelect.val(settings.chartType);
+    } else {
+      this.$chartTypeSelect.val();
+    }
+  }
+
   private getCustomSettings() {
     const result = {
       data: JSON.stringify({
         azureSubscriptionId: this.$subscriptionSelect.val(),
         migrateProjectName: this.$migrationProjectSelect.val(),
         resourceGroupName: this.$resourceGroupSelect.val(),
+        chartType: this.$chartTypeSelect.val()
       } as ISettings),
     };
     return result;

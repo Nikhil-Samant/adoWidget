@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "azure-migrate-widgets",
     "publisher": "Nikhil-Samant",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "name": "Azure Migrate",
     "baseUri": "",
     "description": "Enable users to visualise the overall status of Azure Migrate, delivering a visual indications on the dashboard",
@@ -32,7 +32,7 @@
             ],
             "properties": {
                 "name": "Azure Migrate Summary",
-                "description": "Gets the Azure Migrate summary",
+                "description": "Display the number of servers discovered, assessed, replicating, test migrated and migrated in the Azure Migrate project",
                 "catalogIconUrl": "dist/img/CatalogIcon.png",
                 "uri": "dist/summary.html",
                 "isNameConfigurable": true,
